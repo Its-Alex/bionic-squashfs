@@ -78,21 +78,17 @@ cp -p /tmp/.parents /.parents
 
 rm /.mkrelease
 mkdir /tmp/mkrelease/
-mkdir /tmp/mkrelease/"$image_id"/
 
 if [ -e /vmlinuz ]; then type=vmlinuz; else type=vmlinux; fi
 version="$(readlink -f /${{type}} | cut -d- -f2-)"
-cp -p /boot/${{type}}-"$version" /tmp/mkrelease/"$image_id"/${{type}}-"$version"
-cp -p /boot/initrd.img-"$version" /tmp/mkrelease/"$image_id"/initrd.img-"$version"
-ln -fs --no-target-directory ${{type}}-"$version" /tmp/mkrelease/"$image_id"/${{type}}-current-generic
-ln -fs --no-target-directory initrd.img-"$version" /tmp/mkrelease/"$image_id"/initrd.img-current-generic
+cp -p /boot/${{type}}-"$version" /tmp/mkrelease/${{type}}
+cp -p /boot/initrd.img-"$version" /tmp/mkrelease/initrd.img
 apt-get clean
 find /var/lib/apt/lists/ -type f -regextype posix-egrep -regex '.*(_Packages|_Sources|_Release|\.gpg)' -delete
 rm -f /var/cache/apt/pkgcache.bin /var/cache/apt/srcpkgcache.bin
 find /var/log/ -type f -delete
 
-mksquashfs / /tmp/mkrelease/"$image_id"/filesystem-"$version".squashfs -wildcards -ef /tmp/excludes.gen
-ln -fs --no-target-directory filesystem-"$version".squashfs /tmp/mkrelease/"$image_id"/filesystem-current-generic.squashfs
+mksquashfs / /tmp/mkrelease/filesystem.squashfs -wildcards -ef /tmp/excludes.gen
 """
 
 def unshare_mount() -> None:
@@ -204,7 +200,7 @@ def generate(dockerfile_path: str, tag: str, release_folder: str) -> str:
     run(['mkdir', '-p', release_folder])
     run(['rsync', '-a', '-vv', '-i',
          '--chmod=a-w,a+r',
-         os.path.join(df_dir, 'tmp', 'mkrelease', image_id, ''),
+         os.path.join(df_dir, 'tmp', 'mkrelease', ''),
          os.path.join(release_folder,)])
 
     # # LINK
