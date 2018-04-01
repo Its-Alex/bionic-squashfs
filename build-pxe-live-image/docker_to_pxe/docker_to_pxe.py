@@ -194,27 +194,12 @@ def generate(dockerfile_path: str, tag: str, release_folder: str) -> str:
          '%s:latest' % tag,
          '--', 'sh', '-c', generate])
 
-    # COPY
-    # run(['mkdir', '-p',
-    #      os.path.join(release_folder, image_id)])
     run(['mkdir', '-p', release_folder])
     run(['rsync', '-a', '-vv', '-i',
          '--chmod=a-w,a+r',
          os.path.join(df_dir, 'tmp', 'mkrelease', ''),
          os.path.join(release_folder,)])
 
-    # # LINK
-    # run(['ln', '-fs', '--no-target-directory',
-    #      image_id, os.path.join(release_folder, 'current')])
-    # run(['ln', '-fs', '--no-target-directory',
-    #      os.path.join('current', 'vmlinuz-current-generic'),
-    #      os.path.join(release_folder, 'vmlinuz-current-generic')])
-    # run(['ln', '-fs', '--no-target-directory',
-    #      os.path.join('current', 'initrd.img-current-generic'),
-    #      os.path.join(release_folder, 'initrd.img-current-generic')])
-    # run(['ln', '-fs', '--no-target-directory',
-    #      os.path.join('current', 'filesystem-current-generic.squashfs'),
-    #      os.path.join(release_folder, 'filesystem-current-generic.squashfs')])
 
 def link(image):
     """Link the postboot scripts"""

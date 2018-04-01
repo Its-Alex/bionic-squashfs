@@ -1,0 +1,12 @@
+[Unit]
+Description=hooktftp
+
+[Service]
+StartLimitInterval=5
+StartLimitBurst=10
+ExecStart=/usr/local/bin/hooktftp
+Restart=always
+RestartSec=120
+
+[Install]
+WantedBy=multi-user.target

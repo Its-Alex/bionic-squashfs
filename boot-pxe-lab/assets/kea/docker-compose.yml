@@ -1,0 +1,12 @@
+version: '3'
+services:
+  kea:
+    image: harobed/kea:latest
+    restart: unless-stopped
+    container_name: kea
+    network_mode: host
+    ports:
+      - "67:67/udp"
+    command: ["/usr/local/sbin/kea-dhcp4", "-c", "/kea-config.json"]
+    volumes:
+      - ./kea-config.json:/kea-config.json
