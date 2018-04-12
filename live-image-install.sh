@@ -2,6 +2,10 @@
 
 echo 'pxe-live-image' > /etc/hostname
 
+export LANGUAGE=C.UTF-8
+export LANG=C.UTF-8
+export LC_ALL=C.UTF-8
+
 apt-get update && apt-get install -y --no-install-recommends \
     linux-image-generic \
     live-boot \

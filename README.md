@@ -18,5 +18,8 @@ $ brew cask install vagrant virtualbox
 
 ## Usage
 
-1. go to [build-pxe-live-image/](build-pxe-live-image/)
-2. go to [boot-pxe-lab](boot-pxe-lab/)
+How to build `pxe-image`:
+
+```
+$ make build
+```

@@ -1,6 +1,0 @@
-port: 69
-user: root
-hooks:
-  - type: file
-    regexp: ^.*$
-    template: /pxe-live-image/$0
