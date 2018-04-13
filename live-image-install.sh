@@ -6,8 +6,6 @@ export LANGUAGE=C.UTF-8
 export LANG=C.UTF-8
 export LC_ALL=C.UTF-8
 
-mkdir /var/log/journal
-
 apt update && apt upgrade -y && apt install -y --no-install-recommends \
     linux-image-generic \
     live-boot \
@@ -39,7 +37,7 @@ apt clean
 
 echo bnx2 >> /etc/initramfs-tools/modules
 echo ufs >> /etc/initramfs-tools/modules
-echo ipmi_devintf
+echo ipmi_devintf >> /etc/initramfs-tools/modules
 echo ipmi_si >> /etc/initramfs-tools/modules
 
 echo "root:password" | chpasswd

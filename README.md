@@ -1,6 +1,6 @@
 # boot-pxe-lab
 
-This is one "minimalist" environment to test boot to PXE.
+This is a pxe image builder for ubuntu 18.04 with vagrant and debootstrap
 
 ## Prerequisite
 
@@ -14,7 +14,6 @@ On OSX, execute this command with [brew](https://brew.sh/index_fr.html) to insta
 ```
 $ brew cask install vagrant virtualbox
 ```
-
 
 ## Usage
 
