@@ -1,12 +1,14 @@
 #!/bin/bash
 
-echo 'pxe-live-image' > /etc/hostname
+echo 'pxe-live' > /etc/hostname
 
 export LANGUAGE=C.UTF-8
 export LANG=C.UTF-8
 export LC_ALL=C.UTF-8
 
-apt-get update && apt-get install -y --no-install-recommends \
+mkdir /var/log/journal
+
+apt update && apt upgrade -y && apt install -y --no-install-recommends \
     linux-image-generic \
     live-boot \
     systemd-sysv \
@@ -29,11 +31,18 @@ apt-get update && apt-get install -y --no-install-recommends \
     parted \
     hdparm \
     jq \
-    ntfs-config
+    ntfs-config \
+    ipmitool \
+    freeipmi
 
-apt-get clean
+apt clean
 
-echo "password\npassword\n" | passwd root
+echo bnx2 >> /etc/initramfs-tools/modules
+echo ufs >> /etc/initramfs-tools/modules
+echo ipmi_devintf
+echo ipmi_si >> /etc/initramfs-tools/modules
+
+echo "root:password" | chpasswd
 
 echo grub-pc grub-pc/install_devices_empty boolean true | debconf-set-selections
 echo grub-pc grub2/linux_cmdline string                 | debconf-set-selections
