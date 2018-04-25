@@ -1,9 +1,18 @@
+# Current directory name
+OS_NAME = $(notdir $(shell pwd))
+
+OUTPUT_DIR = ./output
+
 .PHONY: build
-build: clean
+build:
+	mkdir -p $(OUTPUT_DIR)
 	vagrant up
-	vagrant ssh -c "sudo /vagrant/builder-install.sh"
+	vagrant ssh -c "sudo /home/vagrant/scripts/build-liveos.sh"
 
 .PHONY: clean
 clean:
 	vagrant destroy -f | true
-	rm -rf release
+	rm -rf $(OUTPUT_DIR) ubuntu-xenial-*.log
+
+.PHONY: rebuild
+rebuild: clean build
