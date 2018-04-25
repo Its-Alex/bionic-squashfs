@@ -47,5 +47,5 @@ mkdir -p $HOME/live_boot/image/live
 )
 
 cp -v $HOME/live_boot/image/live/filesystem.squashfs $HOME/output/filesystem.squashfs
-cp -v $CHROOT_DIR/boot/initrd.img-$(uname -r) $HOME/output/initrd.img
-cp -v $CHROOT_DIR/boot/vmlinuz-$(uname -r) $HOME/output/vmlinuz
+cp -v $CHROOT_DIR/boot/initrd.img-4.15.0-20-generic $HOME/output/initrd.img
+cp -v $CHROOT_DIR/boot/vmlinuz-4.15.0-20-generic $HOME/output/vmlinuz

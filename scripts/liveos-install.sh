@@ -1,22 +1,24 @@
 #!/bin/bash
 echo 'pxe-live-xenial' > /etc/hostname
 
+apt-get update -y
+
+apt-get install -y locales
+
+locale-gen en_US.UTF-8
+
 echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 
 # Create user _apt needed by apt-get
 adduser --force-badname --system --home /nonexistent --no-create-home --quiet _apt || true
 
-apt-get update -y
 apt-get install -y --no-install-recommends \
-    linux-headers-$(uname -r) \
-    linux-image-$(uname -r) \
+    linux-headers-4.15.0-20-generic \
+    linux-image-4.15.0-20-generic \
     live-boot \
     live-boot-initramfs-tools \
     squashfs-tools \
-    systemd-sysv \
-    locales
-
-locale-gen en_US.UTF-8
+    systemd-sysv
 
 echo "root:root" | chpasswd
 
