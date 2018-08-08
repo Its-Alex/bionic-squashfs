@@ -1,4 +1,8 @@
-tmp/
+# Vagrant
 *.log
-release/
+
+# Project 
 .vagrant/
+output/
+release/
+tmp/

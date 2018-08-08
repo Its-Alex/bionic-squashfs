@@ -10,6 +10,7 @@ Vagrant.configure('2') do |config|
     config.vm.synced_folder ".", "/vagrant", disabled: true
     config.vm.synced_folder './scripts', '/home/vagrant/scripts/'
     config.vm.synced_folder './output', '/home/vagrant/output/'
+    config.vm.synced_folder './assets', '/home/vagrant/assets/'
 
     $script = <<SCRIPT
 apt-get update -y
